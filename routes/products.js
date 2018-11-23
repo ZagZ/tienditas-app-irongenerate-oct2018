@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Producto = require('../models/Producto')
+const Tiendita = require('../models/Tiendita')
 
 
 //create Products
@@ -15,7 +16,10 @@ router.post('/new/:tiendaId',(req, res, next)=>{
   req.body['storeID'] = tiendaId
   Producto.create(req.body)
     .then(producto=>{
-      res.redirect(`/productos/detail/${producto._id}`)
+      Tiendita.findByIdAndUpdate(tiendaId,{$push:{products:producto._id}})
+        .then(tiendita=>{
+          res.redirect(`/productos/detail/${producto._id}`)
+        }).catch(e=>next(e))     
     }).catch(error=>{
       res.render('productos/form',{error,producto:req.body})
     })
