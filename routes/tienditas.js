@@ -58,6 +58,21 @@ router.post('/update/:id',(req, res, next)=>{
 })
 
 //delete Tienditas
+router.get('/delete/:id',(req, res, next)=>{
+  const {id} = req.params
+  Tiendita.findById(id)
+    .then(tiendita=>{
+      res.render('tienditas/delete',tiendita)
+    }).catch(e=>next(e))
+})
+
+router.post('/delete/:id',(req, res, next)=>{
+  const {id} = req.params
+  Tiendita.findByIdAndRemove(id)
+    .then(tiendita=>{
+      res.redirect('/tienditas')
+    }).catch(e=>next(e))
+})
 
 
 module.exports = router
