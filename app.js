@@ -55,6 +55,7 @@ const index = require('./routes/index');
 app.use('/', index);
 const tienditas = require('./routes/tienditas')
 app.use('/tienditas', tienditas)
-
+const productos = require('./routes/products')
+app.use('/productos', productos)
 
 module.exports = app;
