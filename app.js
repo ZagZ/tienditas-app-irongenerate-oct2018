@@ -57,9 +57,5 @@ const tienditas = require('./routes/tienditas')
 app.use('/tienditas', tienditas)
 const productos = require('./routes/products')
 app.use('/productos', productos)
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/master
 
 module.exports = app;
